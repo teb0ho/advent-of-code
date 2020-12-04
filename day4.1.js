@@ -4,8 +4,11 @@ let count = 0;
 const fieldsFoundInEachPassport = [];
        
 fs.readFile('./files/day4.txt', (err, data) => {
-    
 
+    if (err) {
+        throw err;
+    }
+    
     const passports = data.toString().split('\n\n');
 
     for (let i = 0; i < passports.length; i++) {

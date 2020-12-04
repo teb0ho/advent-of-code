@@ -3,6 +3,11 @@ const fs = require('fs');
 let count = 0;
 
 fs.readFile('./files/day2.txt', (err, data) => {
+    
+    if (err) {
+        throw err;
+    }
+
     const lines = data.toString().split('\n');
     for (const line of lines) {
         const policyValue = line.split(':');

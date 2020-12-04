@@ -3,6 +3,10 @@ const fs = require('fs');
 let ex = [];
 
 fs.readFile('./files/day3.txt', (err, data) => {
+    if (err) {
+        throw err;
+    }
+
     let index = 3;
     const lines = data.toString().split('\n');
 

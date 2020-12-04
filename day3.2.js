@@ -5,6 +5,10 @@ const rules = [{x: 1, y: 1}, {x: 3, y: 1}, {x: 5, y: 1}, {x: 7, y: 1}, {x: 1, y:
 
 
 fs.readFile('./files/day3.txt', (err, data) => {
+
+    if (err) {
+        throw err;
+    }
     
     const lines = data.toString().split('\n');
     
