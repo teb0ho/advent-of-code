@@ -32,26 +32,26 @@ public class Three
             }
         }
 
-        string epilsonBin = "";
-        string gammaBin = "";
+        string epilsonBinary = "";
+        string gammaBinary = "";
 
         foreach (KeyValuePair<int, int> item in epilson)
         {
-            epilsonBin += item.Value.ToString();
+            epilsonBinary += item.Value.ToString();
         }
 
-        foreach (var item in epilsonBin)
+        foreach (var item in epilsonBinary)
         {
             if (item == '0')
             {
-                gamma += "1";
+                gammaBinary += "1";
             }
             else 
             {
-                gamma += "0";
+                gammaBinary += "0";
             }
         }
 
-        return Convert.ToInt32(epilsonBin, 2) * Convert.ToInt32(gamma, 2);
+        return Convert.ToInt32(epilsonBinary, 2) * Convert.ToInt32(gammaBinary, 2);
     }
 }
