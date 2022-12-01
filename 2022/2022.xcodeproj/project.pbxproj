@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		44267A332938FA640020EC8F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44267A322938FA640020EC8F /* main.swift */; };
 		44267A41293901430020EC8F /* day1.1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44267A40293901430020EC8F /* day1.1.swift */; };
+		44267A442939080B0020EC8F /* day1.2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 44267A432939080B0020EC8F /* day1.2.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,7 @@
 		44267A322938FA640020EC8F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		44267A3B2938FB160020EC8F /* day1.1.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = day1.1.txt; sourceTree = "<group>"; };
 		44267A40293901430020EC8F /* day1.1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day1.1.swift; sourceTree = "<group>"; };
+		44267A432939080B0020EC8F /* day1.2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = day1.2.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				44267A40293901430020EC8F /* day1.1.swift */,
+				44267A432939080B0020EC8F /* day1.2.swift */,
 			);
 			path = day1;
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 			files = (
 				44267A332938FA640020EC8F /* main.swift in Sources */,
 				44267A41293901430020EC8F /* day1.1.swift in Sources */,
+				44267A442939080B0020EC8F /* day1.2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

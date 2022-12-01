@@ -6,5 +6,5 @@
 //
 import Foundation
 
-var dayOneOne = Day1_1()
-dayOneOne.PrintMaxCalories()
+var answer = Day1_2()
+answer.GetTopThree()
