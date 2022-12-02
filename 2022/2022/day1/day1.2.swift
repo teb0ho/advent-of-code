@@ -12,10 +12,7 @@ class Day1_2 {
     var totalCalories: [Int] = []
     
     func GetTopThree() {
-        let filePath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!.appendingPathComponent("repos/advent-of-code/2022/2022/files/day1.1.txt")
-        let tex = try! String(contentsOf: filePath, encoding: .utf8)
-
-        let lines = tex.components(separatedBy: .newlines)
+        let lines = FileUtils().ReadFile(directory: "repos/advent-of-code/2022/2022/files/day1.1.txt")
 
         for line in lines {
             let num = Int(line) ?? 0
