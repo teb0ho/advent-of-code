@@ -26,7 +26,7 @@ class Day1_1 {
             }
         }
 
-        print(totalCalories.max())
+        print(totalCalories.max()!)
     }
 }
 
