@@ -22,19 +22,6 @@ class Day2_1 {
                 var answer = 0
                 answer = EvaluateOptions(first: pair[0], second: pair[1])
                 total += answer + myPlays[pair[1]]!
-//                switch(pair[0]) {
-//                case "A":
-//                    answer = EvaluateOptions(first: pair[0], second: "Y")
-//                    total += answer + myPlays["Y"]!
-//                case "B":
-//                    answer = EvaluateOptions(first: pair[0], second: "X")
-//                    total += answer + myPlays["X"]!
-//                default:
-//                    answer = EvaluateOptions(first: pair[0], second: "Z")
-//                    total += answer + myPlays["Z"]!
-//                }
-        
-                
             }
         }
         
@@ -56,11 +43,11 @@ class Day2_1 {
         } else if first == "B" { // paper (opp)
             switch second {
             case "X": // rock
-                result = 6
+                result = 0
             case "Y": // paper
                 result = 3
             default: // scissors
-                result = 0
+                result = 6
             }
         } else { // scissor
             switch second {
