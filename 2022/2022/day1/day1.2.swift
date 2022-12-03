@@ -12,7 +12,7 @@ class Day1_2 {
     var totalCalories: [Int] = []
     
     func GetTopThree() {
-        let lines = FileUtils.ReadFile(directory: "repos/advent-of-code/2022/2022/files/day1.1.txt")
+        let lines = FileUtils.ReadFile(directory: "repos/advent-of-code/2022/2022/files/day1.txt")
 
         for line in lines {
             let num = Int(line) ?? 0

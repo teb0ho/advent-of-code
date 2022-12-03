@@ -6,7 +6,7 @@
 //
 import Foundation
 
-var answer = Day2_1()
-answer.GetStrategyValue()
+var answer = Day2_2()
+answer.GetAmendedStrategyValue()
 //
 // 2, 1, 3, 6, 6, 3 = 21
