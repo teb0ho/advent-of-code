@@ -1,9 +1,8 @@
-import 'dart:io';
+import 'util.dart';
 
 void main() {
-  var file = File('./files/day1.txt');
   try {
-    var fileContent = file.readAsStringSync();
+    var fileContent = readFile('./files/day1.txt');
 
     List<String> lines = fileContent.split('\n');
     List<int> left = [];
