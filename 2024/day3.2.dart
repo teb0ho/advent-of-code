@@ -2,11 +2,8 @@ import 'util.dart';
 
 void main() {
   var fileContent = readFile('./files/day3.txt')
-      .replaceAll(
-          RegExp(r"don't\(\).*?do\(\)", multiLine: true, caseSensitive: true),
-          '')
-      .replaceAll(
-          RegExp(r"don't\(\).*", multiLine: true, caseSensitive: true), '');
+      .replaceAll(RegExp(r"don't\(\).*?do\(\)", dotAll: true), ' ')
+      .replaceAll(RegExp(r"don't\(\).*"), ' ');
 
   RegExp regex = RegExp(r'mul\((\d+),(\d+)\)');
 
