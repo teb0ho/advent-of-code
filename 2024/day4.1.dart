@@ -12,11 +12,25 @@ bool horizontal(int columnIndex, int rowIndex, List<String> lines, int columns,
 
 bool vertical(int columnIndex, int rowIndex, List<String> lines, int columns,
     int rows, String xmas, String samx) {
-  var result = false;
-  if ((rowIndex + 3 < rows)) {}
+  if (!(rowIndex + 3 < rows)) return false;
 
-  String substring = lines[rowIndex].substring(columnIndex, columnIndex + 3);
+  var substring = "";
+  substring += lines[rowIndex][columnIndex];
+  substring += lines[rowIndex + 1][columnIndex];
+  substring += lines[rowIndex + 2][columnIndex];
+  substring += lines[rowIndex + 3][columnIndex];
+
   return xmas == substring || samx == substring;
+}
+
+bool crossLeft(int columnIndex, int rowIndex, List<String> lines, int columns,
+    int rows, String xmas, String samx) {
+  return false;
+}
+
+bool crossRight(int columnIndex, int rowIndex, List<String> lines, int columns,
+    int rows, String xmas, String samx) {
+  return false;
 }
 
 void main() {
@@ -26,7 +40,6 @@ void main() {
 
   final HashSet<String> words = HashSet();
 
-  var count = 0;
   var xmas = 'XMAS';
   var samx = 'SAMX';
 
@@ -36,7 +49,11 @@ void main() {
   for (var i = 0; i < lines.length; i++) {
     for (var j = 0; j < columns; j++) {
       if (horizontal(j, i, lines, columns, xmas, samx))
-        ("${j},${i}-horizontal");
+        words.add("$j,$i-horizontal");
+      if (vertical(j, i, lines, columns, rows, xmas, samx))
+        words.add("$i,$j-vertical");
     }
   }
+
+  print(words.length);
 }
