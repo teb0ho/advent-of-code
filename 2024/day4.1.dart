@@ -4,9 +4,9 @@ import 'util.dart';
 
 bool horizontal(int columnIndex, int rowIndex, List<String> lines, int columns,
     String xmas, String samx) {
-  if (!(columns - columnIndex > 3)) return false;
+  if (!((columnIndex + 3) < columns)) return false;
 
-  String substring = lines[rowIndex].substring(columnIndex, columnIndex + 3);
+  String substring = lines[rowIndex].substring(columnIndex, columnIndex + 4);
   return xmas == substring || samx == substring;
 }
 
@@ -23,14 +23,30 @@ bool vertical(int columnIndex, int rowIndex, List<String> lines, int columns,
   return xmas == substring || samx == substring;
 }
 
-bool crossLeft(int columnIndex, int rowIndex, List<String> lines, int columns,
-    int rows, String xmas, String samx) {
-  return false;
-}
-
 bool crossRight(int columnIndex, int rowIndex, List<String> lines, int columns,
     int rows, String xmas, String samx) {
-  return false;
+  if (!(rowIndex + 3 < rows && columnIndex + 3 < columns)) return false;
+
+  var substring = "";
+  substring += lines[rowIndex][columnIndex];
+  substring += lines[rowIndex + 1][columnIndex + 1];
+  substring += lines[rowIndex + 2][columnIndex + 2];
+  substring += lines[rowIndex + 3][columnIndex + 3];
+
+  return xmas == substring || samx == substring;
+}
+
+bool crossLeft(int columnIndex, int rowIndex, List<String> lines, int columns,
+    int rows, String xmas, String samx) {
+  if (!(rowIndex + 3 < rows && columnIndex - 3 > -1)) return false;
+
+  var substring = "";
+  substring += lines[rowIndex][columnIndex];
+  substring += lines[rowIndex + 1][columnIndex - 1];
+  substring += lines[rowIndex + 2][columnIndex - 2];
+  substring += lines[rowIndex + 3][columnIndex - 3];
+
+  return xmas == substring || samx == substring;
 }
 
 void main() {
@@ -49,9 +65,13 @@ void main() {
   for (var i = 0; i < lines.length; i++) {
     for (var j = 0; j < columns; j++) {
       if (horizontal(j, i, lines, columns, xmas, samx))
-        words.add("$j,$i-horizontal");
+        words.add("$i,$j-horizontal");
       if (vertical(j, i, lines, columns, rows, xmas, samx))
         words.add("$i,$j-vertical");
+      if (crossLeft(j, i, lines, columns, rows, xmas, samx))
+        words.add("$i,$j-crossLeft");
+      if (crossRight(j, i, lines, columns, rows, xmas, samx))
+        words.add("$i,$j-crossRight");
     }
   }
 
