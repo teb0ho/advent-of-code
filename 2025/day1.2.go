@@ -7,7 +7,7 @@ import (
 	"strconv"
 )
 
-func findPassword() {
+func findPassword2() {
 	file, err := os.Open("./files/day1.txt")
 	position := 50
 	totalZeros := 0
@@ -29,13 +29,10 @@ func findPassword() {
 			return
 		}
 
-		newPosition := applyRotation(position, rotation, count)
-
-		if newPosition == 0 {
-			totalZeros++
-		}
+		newPosition, totalZeros1 := applyRotation2(position, rotation, count, totalZeros)
 
 		position = newPosition
+		totalZeros = totalZeros1
 	}
 
 	if err := scanner.Err(); err != nil {
@@ -45,7 +42,7 @@ func findPassword() {
 	fmt.Println(totalZeros)
 }
 
-func applyRotation(position int, rotation byte, count int) int {
+func applyRotation2(position int, rotation byte, count int, totalZeros int) (int, int) {
 	if rotation == 'L' {
 		for range count {
 			if position == 0 {
@@ -53,15 +50,19 @@ func applyRotation(position int, rotation byte, count int) int {
 				continue
 			}
 			position--
+			if position == 0 {
+				totalZeros++
+			}
 		}
 	} else {
 		for range count {
 			if position == 99 {
 				position = 0
+				totalZeros++
 				continue
 			}
 			position++
 		}
 	}
-	return position
+	return position, totalZeros
 }
