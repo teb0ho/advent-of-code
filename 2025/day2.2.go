@@ -39,6 +39,19 @@ func giftShop2() {
 						total += i
 					}
 				} else {
+					var results []string
+					matched = false
+					for j := 1; j <= len(rangeString); j += 2 {
+						if len(rangeString)%j == 0 && len(rangeString) != 1 {
+							for k := 0; k < len(rangeString); k += j {
+								end := k + j
+								results = append(results, rangeString[k:end])
+
+							}
+						} else {
+							continue
+						}
+					}
 
 				}
 			}
