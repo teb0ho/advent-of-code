@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	giftShop2()
+	lobby()
 }
