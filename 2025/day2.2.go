@@ -8,6 +8,34 @@ import (
 	"strings"
 )
 
+type IntSet map[int]struct{}
+
+// NewIntSet creates a new empty integer set
+func NewIntSet() IntSet {
+	return make(IntSet)
+}
+
+// Add adds an element to the set
+func (s IntSet) Add(element int) {
+	s[element] = struct{}{}
+}
+
+// Contains checks if an element exists in the set
+func (s IntSet) Contains(element int) bool {
+	_, exists := s[element]
+	return exists
+}
+
+// Remove removes an element from the set
+func (s IntSet) Remove(element int) {
+	delete(s, element)
+}
+
+// Size returns the number of elements in the set
+func (s IntSet) Size() int {
+	return len(s)
+}
+
 func giftShop2() {
 	file, err := os.Open("./files/day2.txt")
 	total := 0
@@ -33,27 +61,41 @@ func giftShop2() {
 			for i := ranges1Start; i <= ranges1End; i++ {
 				rangeString := strconv.Itoa(i)
 
-				if len(rangeString)%2 != 0 {
-					half := len(rangeString) / 2
-					if rangeString[:half] == rangeString[half:] {
-						total += i
-					}
-				} else {
-					var results []string
-					matched = false
-					for j := 1; j <= len(rangeString); j += 2 {
-						if len(rangeString)%j == 0 && len(rangeString) != 1 {
-							for k := 0; k < len(rangeString); k += j {
-								end := k + j
-								results = append(results, rangeString[k:end])
+				var results []string
+				test := ""
 
-							}
-						} else {
-							continue
+				for j := 1; j < len(rangeString); j++ {
+					found := false
+					if len(rangeString)%j == 0 {
+						for k := 0; k < len(rangeString); k += j {
+							end := k + j
+							test = rangeString[k:end]
+							results = append(results, test)
 						}
-					}
+						allMatched := true
+						for _, item := range results {
+							if test != item {
+								allMatched = false
+								break
+							}
+						}
 
+						if allMatched {
+							fmt.Println(results)
+							fmt.Println(i)
+							total += i
+							found = true
+							break
+						}
+						if found {
+							break
+						}
+						results = nil
+					} else {
+						continue
+					}
 				}
+
 			}
 		}
 		fmt.Println(total)
