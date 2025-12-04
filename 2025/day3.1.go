@@ -25,7 +25,6 @@ func lobby() {
 		index := 0
 		newString := ""
 		max := 0
-		total := 0
 		maxCombined := 0
 		highest := ""
 
@@ -35,7 +34,7 @@ func lobby() {
 			if i != (len(bank)-1) && number > max {
 				max = number
 				index = i
-				highest += strconv.Itoa(max)
+				highest = strconv.Itoa(max)
 			}
 		}
 
@@ -46,16 +45,18 @@ func lobby() {
 			}
 		}
 
-		for character := range newString {
-			number := int(character - '0')
+		for i := index + 1; i < len(bank); i++ {
+			number := int(bank[i] - '0')
 
-			highest += strconv.Itoa(number)
-			highestConv, _ := strconv.Atoi(highest)
-
+			highestConv, _ := strconv.Atoi(highest + strconv.Itoa(number))
 			if highestConv > maxCombined {
 				maxCombined = highestConv
 			}
 		}
+
+		fmt.Println(maxCombined)
+
+		total += maxCombined
 
 	}
 
