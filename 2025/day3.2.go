@@ -26,6 +26,7 @@ func lobby2() {
 		stringSample := ""
 		left := 12
 		max := 0
+		allMatched := true
 		// 14 - 12 = 2
 
 		for i := 0; i < len(bank); i++ {
@@ -50,7 +51,7 @@ func lobby2() {
 						character := bank[j]
 						number = int(character - '0')
 
-						if number == max {
+						if number == max /*&& (allMatched || len(indexList) == 0)*/ {
 							max = number
 							indexList = append(indexList, index)
 							indexList = append(indexList, j)
@@ -59,15 +60,31 @@ func lobby2() {
 							max = number
 							index = j
 						}
+					}
 
+					// for k := i + 1; k <= moves; k++ {
+					// 	if number == int(bank[k]) {
+					// 		// allMatched = true
+					// 	} else {
+					// 		// allMatched = false
+					// 	}
+					// }
+
+					for l := 0; l < len(indexList); l++ {
+						digit := int(bank[indexList[l]] - '0')
+
+						if digit != max {
+							allMatched = false
+						}
 					}
 
 					if max != 0 {
 						stringSample += strconv.Itoa(max)
 
-						if len(indexList) > 0 {
+						if len(indexList) > 1 && allMatched {
 							sort.Ints(indexList)
 							i = indexList[0]
+							//index = indexList[0]
 						} else if index != 0 {
 							i = index
 						}
@@ -76,6 +93,8 @@ func lobby2() {
 					}
 					left--
 					max = 0
+					// allMatched = false
+					//	indexList = []int{}
 
 				} else {
 					if max != 0 {
@@ -86,6 +105,7 @@ func lobby2() {
 					}
 					left--
 					max = 0
+					// allMatched = false
 				}
 			} else if len(bank)-i == left {
 				if len(stringSample) != 12 {
@@ -96,6 +116,7 @@ func lobby2() {
 						stringSample += strconv.Itoa(number)
 
 						max = 0
+						// allMatched = false
 					}
 					left--
 				}
@@ -111,6 +132,7 @@ func lobby2() {
 				total += numberConv
 				stringSample = ""
 				max = 0
+				// allMatched = false
 			}
 		}
 	}
