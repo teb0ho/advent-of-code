@@ -41,6 +41,8 @@ func lobby2() {
 				if number == 9 {
 					stringSample += strconv.Itoa(number)
 					left--
+					// bank = bank[i+1:]
+					// i = 0
 					max = 0
 				} else if number != 9 {
 					moves := len(bank) - i - left + i
@@ -92,6 +94,8 @@ func lobby2() {
 						stringSample += strconv.Itoa(number)
 					}
 					left--
+					// bank = bank[i+1:]
+					// i = 0
 					max = 0
 					// allMatched = false
 					//	indexList = []int{}
@@ -104,6 +108,8 @@ func lobby2() {
 						stringSample += strconv.Itoa(number)
 					}
 					left--
+					// bank = bank[i+1:]
+					// i = 0
 					max = 0
 					// allMatched = false
 				}
@@ -119,6 +125,8 @@ func lobby2() {
 						// allMatched = false
 					}
 					left--
+					// bank = bank[i+1:]
+					// i = 0
 				}
 			} else {
 				if number > max {
