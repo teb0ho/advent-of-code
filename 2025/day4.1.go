@@ -1,3 +1,11 @@
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"os"
+)
+
 func printingDepartment() {
 	file, err := os.Open("./files/day3.txt")
 
@@ -8,16 +16,15 @@ func printingDepartment() {
 
 	defer file.Close()
 
-	total := 0
-	lineCount := 0
+	//total := 0
+	lineCount := []string{}
 
 	scanner := bufio.NewScanner(file)
 	for scanner.Scan() {
 		line := scanner.Text()
+		lineCount = append(lineCount, line)
+	}
 
-		for i := 0; i < len(line); i++ {
-			character := line[i]
-
-		}
+	for i := 0; i < len(lineCount[0]); i++ {
 	}
 }
