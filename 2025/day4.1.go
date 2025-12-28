@@ -26,8 +26,12 @@ func printingDepartment() {
 	}
 
 	for i := 0; i < len(lines); i++ {
-		count := 0
 		for j, _ := range lines[i] {
+			if rune(lines[i][j]) != '@' {
+				continue
+			}
+
+			count := 0
 
 			topLeft := []int{i - 1, j - 1}
 			top := []int{i - 1, j}
@@ -80,7 +84,7 @@ func printingDepartment() {
 				}
 			}
 
-			if bottomRight[0] >= 0 || bottomRight[1] >= 0 || bottomRight[0] < len(lines) || bottomRight[1] < len(lines[0]) {
+			if bottomRight[0] >= 0 && bottomRight[0] < len(lines) && bottomRight[1] >= 0 && bottomRight[1] < len(lines[0]) {
 				if rune(lines[bottomRight[0]][bottomRight[1]]) == '@' {
 					count++
 				}
@@ -91,6 +95,6 @@ func printingDepartment() {
 			}
 		}
 
-		fmt.Println(total)
 	}
+	fmt.Println(total)
 }
