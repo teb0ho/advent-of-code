@@ -54,9 +54,7 @@ func cafeteria() {
 				break
 			}
 		}
-
 	}
 
 	fmt.Println(count)
-
 }
