@@ -41,6 +41,7 @@ func cafeteria() {
 		}
 	}
 
+	finalList := [][]int{}
 	for _, num := range secondList {
 		numToCheck, _ := strconv.Atoi(num)
 
@@ -48,11 +49,11 @@ func cafeteria() {
 			parts := strings.Split(val, "-")
 			start, _ := strconv.Atoi(parts[0])
 			end, _ := strconv.Atoi(parts[1])
-
-			if numToCheck >= start && numToCheck <= end {
-				count++
-				break
-			}
+			finalList = append(finalList, []int{start, end})
+			// if numToCheck >= start && numToCheck <= end {
+			// 	count++
+			// 	break
+			// }
 		}
 	}
 
