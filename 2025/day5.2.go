@@ -33,15 +33,36 @@ func cafeteria2() {
 		list = append(list, line)
 	}
 
+	var finalList [][2]int
 	for _, val := range list {
 		parts := strings.Split(val, "-")
 		start, _ := strconv.Atoi(parts[0])
 		end, _ := strconv.Atoi(parts[1])
 
-		for i := start; i <= end; i++ {
-			if !slices.Contains(results, i) {
-				results = append(results, i)
+		finalList = append(finalList, [2]int{start, end})
+
+		// for i := start; i <= end; i++ {
+		// 	if !slices.Contains(results, i) {
+		// 		results = append(results, i)
+		// 	}
+		// }
+	}
+
+	slices.SortFunc(finalList, func(a, b [2]int) int {
+		return a[0] - b[0]
+	})
+
+	for i := 0; i < len(finalList); i++ {
+		currentStart := finalList[i][0]
+		currentEnd := finalList[i][1]
+
+		for j := i + 1; j < len(finalList); j++ {
+			nextStart := finalList[j][0]
+			nextEnd := finalList[j][1]
+			if nextStart <= currentEnd && nextEnd <= currentEnd {
+				//finalList = slices.Delete(finalList, i)
 			}
+
 		}
 	}
 
