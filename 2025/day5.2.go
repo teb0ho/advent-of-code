@@ -60,7 +60,15 @@ func cafeteria2() {
 			nextStart := finalList[j][0]
 			nextEnd := finalList[j][1]
 			if nextStart <= currentEnd && nextEnd <= currentEnd {
-				finalList = slices.Delete(finalList, i)
+				var newList [][2]int
+
+				for k, v := range finalList {
+					if k != i {
+						newList = append(newList, v)
+					}
+				}
+
+				finalList = newList
 			}
 
 		}
