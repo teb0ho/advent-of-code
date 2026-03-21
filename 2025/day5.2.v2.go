@@ -65,6 +65,9 @@ func cafeteria2v2() {
 				finalList[i][1] = startTemp
 				finalList[i+1][0] = startTemp + 1
 			}
+			if finalList[i][1] == finalList[i+1][0] && finalList[i][1] < finalList[i+1][1] {
+				finalList[i+1][0] = finalList[i+1][0] + 1
+			}
 		}
 	}
 
@@ -77,3 +80,6 @@ func cafeteria2v2() {
 
 	fmt.Printf("Total: %d\n", total)
 }
+
+// 391425739187673
+// 391425739187688
