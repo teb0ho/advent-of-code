@@ -53,7 +53,7 @@ func cafeteria2() {
 	})
 
 	for i := 0; i < len(finalList); i++ {
-		currentStart := finalList[i][0]
+		//currentStart := finalList[i][0]
 		currentEnd := finalList[i][1]
 
 		for j := i + 1; j < len(finalList); j++ {
