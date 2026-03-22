@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"slices"
+	"sort"
 	"strconv"
 	"strings"
 )
@@ -20,7 +21,6 @@ func cafeteria2() {
 	defer file.Close()
 
 	scanner := bufio.NewScanner(file)
-	results := []int{}
 	list := []string{}
 
 	for scanner.Scan() {
@@ -40,39 +40,77 @@ func cafeteria2() {
 		end, _ := strconv.Atoi(parts[1])
 
 		finalList = append(finalList, [2]int{start, end})
-
-		// for i := start; i <= end; i++ {
-		// 	if !slices.Contains(results, i) {
-		// 		results = append(results, i)
-		// 	}
-		// }
 	}
 
-	slices.SortFunc(finalList, func(a, b [2]int) int {
-		return a[0] - b[0]
+	// sort results
+	sort.Slice(finalList, func(i, j int) bool {
+		return finalList[i][0] < finalList[j][0]
 	})
 
+	// remove identicals
 	for i := 0; i < len(finalList); i++ {
-		//currentStart := finalList[i][0]
-		currentEnd := finalList[i][1]
-
-		for j := i + 1; j < len(finalList); j++ {
-			nextStart := finalList[j][0]
-			nextEnd := finalList[j][1]
-			if nextStart <= currentEnd && nextEnd <= currentEnd {
-				var newList [][2]int
-
-				for k, v := range finalList {
-					if k != i {
-						newList = append(newList, v)
-					}
-				}
-
-				finalList = newList
-			}
-
+		if finalList[i][0] == finalList[i][1] {
+			finalList = slices.Delete(finalList, i, i+1)
 		}
 	}
 
-	fmt.Println(len(results))
+	// remove duplicates
+	for i := 0; i < len(finalList); i++ {
+		for j := 0; j < len(finalList); j++ {
+			if i != j && finalList[i][0] == finalList[j][0] && finalList[i][1] == finalList[j][1] {
+				finalList = slices.Delete(finalList, j, j+1)
+			}
+		}
+	}
+
+	// // remove overlaps
+	// for i := 0; i < len(finalList); i++ {
+	// 	for j := 0; j < len(finalList); j++ {
+	// 		if j != i && (finalList[i][0] < finalList[j][0] || finalList[i][0] == finalList[j][0]) &&
+	// 			(finalList[i][1] > finalList[j][1] || finalList[i][1] == finalList[j][1]) {
+	// 			finalList = slices.Delete(finalList, j, j+1)
+	// 		}
+	// 	}
+	// }
+
+	sort.Slice(finalList, func(i, j int) bool {
+		return finalList[i][0] < finalList[j][0]
+	})
+
+	// fix overlaps
+	for i := 0; i < len(finalList); i++ {
+		if i+1 < len(finalList) {
+			if finalList[i][1] > finalList[i+1][0] && finalList[i][1] < finalList[i+1][1] {
+				startTemp := finalList[i+1][0]
+				finalList[i][1] = startTemp
+				finalList[i+1][0] = startTemp + 1
+			}
+			if finalList[i][1] == finalList[i+1][0] && finalList[i][1] < finalList[i+1][1] {
+				finalList[i+1][0] = finalList[i+1][0] + 1
+			}
+		}
+	}
+
+	// calculate total
+	total := 0
+	for _, val := range finalList {
+		answer := val[1] - val[0] + 1
+		if answer != 1 {
+			total += answer
+		}
+	}
+
+	fmt.Printf("Total: %d\n", total)
 }
+
+// 391425739187673
+// 391425739187688
+// 379577343153807
+// 379577343153787
+// 379577343153794
+// 379577343153787
+// 379577343153788
+// 353716783056986
+// 353716783056987
+// 353716783056986
+// 391425739187654

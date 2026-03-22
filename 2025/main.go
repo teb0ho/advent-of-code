@@ -1,5 +1,5 @@
 package main
 
 func main() {
-	cafeteria2v2()
+	cafeteria2()
 }

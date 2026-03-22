@@ -10,7 +10,7 @@
             "request": "launch",
             "mode": "debug",
             "program": "${workspaceFolder}/2025",
-            "args": ["day5.2.v2.go", "main.go"]
+            "args": ["day5.2.go", "main.go"]
         }
     ]
 }
