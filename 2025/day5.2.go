@@ -48,11 +48,11 @@ func cafeteria2() {
 	})
 
 	// remove identicals
-	for i := 0; i < len(finalList); i++ {
-		if finalList[i][0] == finalList[i][1] {
-			finalList = slices.Delete(finalList, i, i+1)
-		}
-	}
+	// for i := 0; i < len(finalList); i++ {
+	// 	if finalList[i][0] == finalList[i][1] {
+	// 		finalList = slices.Delete(finalList, i, i+1)
+	// 	}
+	// }
 
 	// remove duplicates
 	for i := 0; i < len(finalList); i++ {
