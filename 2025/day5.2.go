@@ -47,13 +47,6 @@ func cafeteria2() {
 		return finalList[i][0] < finalList[j][0]
 	})
 
-	// remove identicals
-	// for i := 0; i < len(finalList); i++ {
-	// 	if finalList[i][0] == finalList[i][1] {
-	// 		finalList = slices.Delete(finalList, i, i+1)
-	// 	}
-	// }
-
 	// remove duplicates
 	for i := 0; i < len(finalList); i++ {
 		for j := 0; j < len(finalList); j++ {
@@ -63,15 +56,15 @@ func cafeteria2() {
 		}
 	}
 
-	// // remove overlaps
-	// for i := 0; i < len(finalList); i++ {
-	// 	for j := 0; j < len(finalList); j++ {
-	// 		if j != i && (finalList[i][0] < finalList[j][0] || finalList[i][0] == finalList[j][0]) &&
-	// 			(finalList[i][1] > finalList[j][1] || finalList[i][1] == finalList[j][1]) {
-	// 			finalList = slices.Delete(finalList, j, j+1)
-	// 		}
-	// 	}
-	// }
+	// remove overlaps
+	for i := 0; i < len(finalList); i++ {
+		for j := 0; j < len(finalList); j++ {
+			if j != i && (finalList[i][0] < finalList[j][0] || finalList[i][0] == finalList[j][0]) &&
+				(finalList[i][1] > finalList[j][1] || finalList[i][1] == finalList[j][1]) {
+				finalList = slices.Delete(finalList, j, j+1)
+			}
+		}
+	}
 
 	sort.Slice(finalList, func(i, j int) bool {
 		return finalList[i][0] < finalList[j][0]
@@ -95,22 +88,9 @@ func cafeteria2() {
 	total := 0
 	for _, val := range finalList {
 		answer := val[1] - val[0] + 1
-		if answer != 1 {
-			total += answer
-		}
+
+		total += answer
 	}
 
 	fmt.Printf("Total: %d\n", total)
 }
-
-// 391425739187673
-// 391425739187688
-// 379577343153807
-// 379577343153787
-// 379577343153794
-// 379577343153787
-// 379577343153788
-// 353716783056986
-// 353716783056987
-// 353716783056986
-// 391425739187654
