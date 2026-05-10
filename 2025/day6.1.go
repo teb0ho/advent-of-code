@@ -32,6 +32,8 @@ func trashCompactor() {
 		list = append(list, line)
 	}
 
+	var ops []string
+
 	for i, val := range list {
 		nums := strings.Fields(val)
 		ints := []int{}
@@ -44,17 +46,16 @@ func trashCompactor() {
 
 			numbers = append(numbers, ints)
 		} else {
-
+			ops = strings.Fields(list[len(list)-1])
 		}
 	}
 
 	finalSum := len(numbers[0])
 	totalArray := make([]int, finalSum)
-	ops := strings.Fields(list[len(list)-1])
 
 	for i := 0; i < len(numbers); i++ {
 		for j, num := range numbers[i] {
-			if i == len(numbers)-1 {
+			if i != len(numbers)-1 {
 				operator := ops[j]
 
 				switch operator {
