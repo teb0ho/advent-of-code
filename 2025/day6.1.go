@@ -43,6 +43,8 @@ func trashCompactor() {
 			}
 
 			numbers = append(numbers, ints)
+		} else {
+
 		}
 	}
 
@@ -52,7 +54,7 @@ func trashCompactor() {
 
 	for i := 0; i < len(numbers); i++ {
 		for j, num := range numbers[i] {
-			if i != len(numbers)-1 {
+			if i == len(numbers)-1 {
 				operator := ops[j]
 
 				switch operator {
