@@ -53,7 +53,7 @@ func trashCompactor() {
 	finalSum := len(numbers[0])
 	totalArray := make([]int, finalSum)
 
-	for i := 0; i < len(numbers); i++ {
+	for i := 1; i < len(numbers); i++ {
 		for j, num := range numbers[i] {
 			if i != len(numbers)-1 {
 				operator := ops[j]
