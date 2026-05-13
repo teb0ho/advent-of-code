@@ -55,20 +55,19 @@ func trashCompactor() {
 
 	for i := 0; i < len(numbers); i++ {
 		for j, num := range numbers[i] {
-			if i != len(numbers)-1 {
-				operator := ops[j]
+			operator := ops[j]
 
-				switch operator {
-				case "+":
-					totalArray[j] += num
-				case "*":
-					if j == 0 {
-						totalArray[j] = num
-					} else {
-						totalArray[j] *= num
-					}
+			switch operator {
+			case "+":
+				totalArray[j] += num
+			case "*":
+				if totalArray[j] == 0 {
+					totalArray[j] = num
+				} else {
+					totalArray[j] *= num
 				}
 			}
+
 		}
 	}
 	total := 0
