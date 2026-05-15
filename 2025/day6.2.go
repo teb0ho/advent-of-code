@@ -21,6 +21,7 @@ func trashCompactor2() {
 	scanner := bufio.NewScanner(file)
 	list := []string{}
 	numbers := [][]int{}
+	digits := [][]string{}
 
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -34,19 +35,32 @@ func trashCompactor2() {
 
 	var ops []string
 
+	var nums []string
+
 	for i, val := range list {
-		nums := strings.Fields(val)
+		nums = strings.Fields(val)
 		ints := []int{}
 
 		if i != len(list)-1 {
 			for _, num := range nums {
 				n, _ := strconv.Atoi(num)
 				ints = append(ints, n)
+
 			}
 
 			numbers = append(numbers, ints)
+			digits = append(digits, nums)
 		} else {
 			ops = strings.Fields(list[len(list)-1])
+		}
+	}
+	largestDigits := make([]int, len(digits[0]))
+
+	for i := 0; i < len(digits); i++ {
+		for j, num := range digits[i] {
+			if len(num) > largestDigits[j] {
+				largestDigits[j] = len(num)
+			}
 		}
 	}
 
