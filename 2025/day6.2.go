@@ -64,6 +64,20 @@ func trashCompactor2() {
 		}
 	}
 
+	var stringDigits = make([][]string, len(digits))
+
+	// get substrings of digits by size
+	for i := 0; i < len(numbers); i++ {
+		index := 0
+		stringDigitsRow := []string{}
+		for j := 0; j < len(numbers[i]); j++ {
+			stringDigitsRow = append(stringDigitsRow, strings.ReplaceAll(list[i][index:index+largestDigits[j]], " ", "-"))
+			index += largestDigits[j] + 1
+		}
+		stringDigits[i] = stringDigitsRow
+		stringDigitsRow = []string{}
+	}
+
 	finalSum := len(numbers[0])
 	totalArray := make([]int, finalSum)
 
