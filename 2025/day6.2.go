@@ -81,6 +81,30 @@ func trashCompactor2() {
 	finalSum := len(numbers[0])
 	totalArray := make([]int, finalSum)
 
+	for i := 0; i < len(stringDigits); i++ {
+		index := 0
+		for k = 0; k < len(stringDigits[i]); k++ {
+			length := len(stringDigits[k][i])
+			for 	
+			
+		}
+
+
+		for j := 0; j < len(stringDigits); j++ {
+			operator := ops[i]
+			num, _ := strconv.Atoi(stringDigits[j][i])
+			switch operator {
+			case "+":
+				totalArray[i] += num
+			case "*":
+				if totalArray[i] == 0 {
+					totalArray[i] = num
+				} else {
+					totalArray[i] *= num
+				}
+			}
+	}
+
 	for i := 0; i < len(numbers); i++ {
 		for j, num := range numbers[i] {
 			operator := ops[j]
