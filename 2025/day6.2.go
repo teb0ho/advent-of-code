@@ -78,13 +78,14 @@ func trashCompactor2() {
 		stringDigitsRow = []string{}
 	}
 
-	finalSum := len(numbers[0])
-	totalArray := make([]int, finalSum)
+	//finalSum := len(numbers[0])
+	totalArray := []int{}
 	nums = []string{}
 
 	k := 0
 	for k < len(stringDigits[0]) {
 		completeNumber := ""
+		nums = []string{}
 
 		postition := 0
 		for postition < len(stringDigits[0][k]) {
@@ -115,45 +116,12 @@ func trashCompactor2() {
 		}
 		totalArray = append(totalArray, finalAnswer)
 		k++
-		//nums = append(nums, completeNumber)
 	}
 
-	// for j := 0; j < len(stringDigits); j++ {
-	// 	operator := ops[i]
-	// 	num, _ := strconv.Atoi(stringDigits[j][i])
-	// 	switch operator {
-	// 	case "+":
-	// 		totalArray[i] += num
-	// 	case "*":
-	// 		if totalArray[i] == 0 {
-	// 			totalArray[i] = num
-	// 		} else {
-	// 			totalArray[i] *= num
-	// 		}
-	// 	}
-	// }
+	total := 0
+	for _, num := range totalArray {
+		total += num
+	}
 
-	// for i := 0; i < len(numbers); i++ {
-	// 	for j, num := range numbers[i] {
-	// 		operator := ops[j]
-
-	// 		switch operator {
-	// 		case "+":
-	// 			totalArray[j] += num
-	// 		case "*":
-	// 			if totalArray[j] == 0 {
-	// 				totalArray[j] = num
-	// 			} else {
-	// 				totalArray[j] *= num
-	// 			}
-	// 		}
-
-	// 	}
-	// }
-	// total := 0
-	// for _, num := range totalArray {
-	// 	total += num
-	// }
-
-	fmt.Println("Total:")
+	fmt.Println("Total: ", total)
 }
