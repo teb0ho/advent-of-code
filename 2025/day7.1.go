@@ -25,3 +25,6 @@ func laboratoriesPart1(input []string) {
 	fmt.Println(input)
 
 }
+
+func seekPipes() {
+}
