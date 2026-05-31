@@ -26,5 +26,5 @@ func laboratoriesPart1(input []string) {
 
 }
 
-func seekPipes() {
+func seekPipes(input string) {
 }
