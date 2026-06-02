@@ -8,6 +8,7 @@ import (
 
 func laboratoriesPart1(input []string) {
 	position := strings.Index(input[0], "S")
+	nextIndeices := []int{}
 
 	for i := 1; i < len(input); i++ {
 		if position != -1 && !strings.Contains(input[i], "^") {
