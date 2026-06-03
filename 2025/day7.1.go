@@ -19,7 +19,8 @@ func laboratoriesPart1(input []string) {
 			indices := re.FindAllStringIndex(input[i], -1)
 
 			for _, index := range indices {
-
+              if len(indices) > 0 {
+			  }
 			}
 		}
 	}
