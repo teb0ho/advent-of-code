@@ -16,6 +16,9 @@ func laboratoriesPart1(input []string) {
 
 			for _, nextIndex := range nextIndices {
 				modifiedString = input[i]
+
+				if input[i][nextIndex] != '^' {
+				}
 				modifiedString = modifiedString[:nextIndex] + "|" + modifiedString[nextIndex+1:]
 				input[i] = modifiedString
 			}
@@ -28,17 +31,15 @@ func laboratoriesPart1(input []string) {
 		} else if strings.Contains(input[i], "|") {
 			re := regexp.MustCompile(`\|`)
 			indices := re.FindAllStringIndex(input[i], -1)
+
 			for _, index := range indices {
 				nextIndices = append(nextIndices, index[0])
 			}
+
 		} else {
 			re := regexp.MustCompile(`\^`)
 			indices := re.FindAllStringIndex(input[i], -1)
 
-			for _, index := range indices {
-				if len(indices) > 0 {
-				}
-			}
 		}
 	}
 
