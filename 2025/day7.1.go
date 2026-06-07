@@ -48,4 +48,5 @@ func laboratoriesPart1(input []string) {
 }
 
 func seekPipes(input string) {
+	
 }
