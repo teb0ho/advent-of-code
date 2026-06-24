@@ -29,4 +29,10 @@ func laboratoriesPart2(input []string) {
 			}
 		}
 	}
+
+	// use new modified input to search all valid pipe paths
+	for i := len(input) - 1; i >= 0; i-- {
+		re := regexp.MustCompile(`\|`)
+		pipePositions := re.FindAllStringIndex(input[i], -1)
+	}
 }
