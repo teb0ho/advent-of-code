@@ -30,7 +30,7 @@ func laboratoriesPart2(input []string) {
 		}
 	}
 
-	validPaths := make([][]int, len(input))
+	var validPaths []string = []string{}
 
 	// use new modified input to search all valid pipe paths
 	for i := len(input) - 1; i >= 0; i-- {
