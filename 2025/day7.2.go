@@ -38,3 +38,7 @@ func laboratoriesPart2(input []string) {
 		pipePositions := re.FindAllStringIndex(input[i], -1)
 	}
 }
+
+// find all valid paths to the end
+func possiblePaths() {
+}
