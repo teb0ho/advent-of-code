@@ -38,7 +38,3 @@ func laboratoriesPart2(input []string) {
 	
 	}
 }
-
-// find all valid paths to the end
-func possiblePaths() {
-}
