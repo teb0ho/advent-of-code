@@ -34,7 +34,7 @@ func laboratoriesPart2(input []string) {
 
 	// use new modified input to search all valid pipe paths
 	fileLength := len(input)
-	for i := len(input) - 1; i >= 1; i-- {
+	for i := 1; i < fileLength; i++ {
 		re := regexp.MustCompile(`\|`)
 		pipePositions := re.FindAllStringIndex(input[i-1], -1)
 
