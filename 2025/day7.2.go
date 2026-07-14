@@ -34,6 +34,7 @@ func laboratoriesPart2(input []string) {
 
 	// use new modified input to search all valid pipe paths
 	fileLength := len(input)
+	previousIndex := 0
     
 	// traverse all paths and check if they are valid
 	for i := 1; i < fileLength; i++ {
