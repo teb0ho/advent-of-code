@@ -45,6 +45,6 @@ func laboratoriesPart2(input []string) {
 }
 
 type path struct {
-	finalString string
+currentString string
     index int
 }
