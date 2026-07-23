@@ -44,6 +44,8 @@ func laboratoriesPart2(input []string) {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
 			pipePositions := re.FindAllStringIndex(input[i-1], -1)
+			index = pipePositions[0][0]
+			outputString += string(input[i][index])
 		}
 
 	}
