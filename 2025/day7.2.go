@@ -37,10 +37,14 @@ func laboratoriesPart2(input []string) {
 	previousIndex := 0
 	// map will store string index where a collision was found and appended string at that point
 	collisionMap := make(map[[2]int]string)
-
+	outputString := ""
+	index := 0
 	// traverse all paths and check if they are valid
 	for i := 1; i < fileLength; i++ {
-		re := regexp.MustCompile(`\|`)
-		pipePositions := re.FindAllStringIndex(input[i-1], -1)
+		if i == 1 {
+			re := regexp.MustCompile(`\|`)
+			pipePositions := re.FindAllStringIndex(input[i-1], -1)
+		}
+
 	}
 }
