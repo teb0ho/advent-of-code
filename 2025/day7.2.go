@@ -42,6 +42,5 @@ func laboratoriesPart2(input []string) {
 	for i := 1; i < fileLength; i++ {
 		re := regexp.MustCompile(`\|`)
 		pipePositions := re.FindAllStringIndex(input[i-1], -1)
-
 	}
 }
