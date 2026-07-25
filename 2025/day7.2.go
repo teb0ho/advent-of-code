@@ -47,6 +47,5 @@ func laboratoriesPart2(input []string) {
 			index = pipePositions[0][0]
 			outputString += string(input[i][index])
 		}
-
 	}
 }
