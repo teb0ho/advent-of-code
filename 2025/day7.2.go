@@ -43,8 +43,8 @@ func laboratoriesPart2(input []string) {
 	for i := 1; i < fileLength; i++ {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
-			pipePositions := re.FindAllStringIndex(input[i-1], -1)
-			index = pipePositions[0][0]
+			pipePositions := re.FindStringIndex(input[i-1])
+			index = pipePositions[0]
 			outputString += string(input[i][index])
 		}
 	}
