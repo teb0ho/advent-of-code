@@ -30,5 +30,5 @@ func main() {
 		list = append(list, line)
 	}
 
-	laboratoriesPart1(list)
+	laboratoriesPart2(list)
 }
