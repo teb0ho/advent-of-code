@@ -46,6 +46,12 @@ func laboratoriesPart2(input []string) {
 			pipePositions := re.FindStringIndex(input[i-1])
 			index = pipePositions[0]
 			outputString += string(input[i][index])
+		} else {
+			if string(input[i][index]) == "|" {
+				outputString += string(input[i][index])
+			} else if string(input[i][index]) == "^" {
+
+			}
 		}
 	}
 }
