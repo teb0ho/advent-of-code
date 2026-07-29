@@ -30,11 +30,11 @@ func laboratoriesPart2(input []string) {
 		}
 	}
 
-	var validPaths []string = []string{}
+	// var validPaths []string = []string{}
 
 	// use new modified input to search all valid pipe paths
 	fileLength := len(input)
-	previousIndex := 0
+	// previousIndex := 0
 	// map will store string index where a collision was found and appended string at that point
 	collisionMap := make(map[[2]int]string)
 	outputString := ""
