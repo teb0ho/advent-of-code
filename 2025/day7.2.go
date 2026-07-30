@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"regexp"
 	"strings"
 )
@@ -49,7 +50,7 @@ func laboratoriesPart2(input []string) {
 		} else {
 			if string(input[i][index]) == "|" {
 				outputString += string(input[i][index])
-			} else if string(input[i][index]) == "^" {
+			} else if len(collisionMap) == 0 && string(input[i][index]) == "^" {
 				if string(input[i][index-1]) == "|" {
 					collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
 				}
@@ -57,7 +58,11 @@ func laboratoriesPart2(input []string) {
 				if string(input[i][index+1]) == "|" {
 					collisionMap[[2]int{i, index + 1}] = outputString + string(input[i][index+1])
 				}
+			} else {
+
 			}
 		}
 	}
+
+	fmt.Println("Collision Map: ", collisionMap)
 }
