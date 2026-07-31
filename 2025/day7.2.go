@@ -51,18 +51,30 @@ func laboratoriesPart2(input []string) {
 			if string(input[i][index]) == "|" {
 				outputString += string(input[i][index])
 			} else if len(collisionMap) == 0 && string(input[i][index]) == "^" {
-				if string(input[i][index-1]) == "|" {
-					collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
-				}
-
-				if string(input[i][index+1]) == "|" {
-					collisionMap[[2]int{i, index + 1}] = outputString + string(input[i][index+1])
-				}
+				checkCollictionOrTraverseVertically(input, i, index, collisionMap, outputString)
 			} else {
-
+				newMap := make(map[[2]int]string)
+				for collisionIndex, collisionString := range collisionMap {
+					checkCollictionOrTraverseVertically(input, i, collisionIndex[1], newMap, collisionString)
+				}
+				collisionMap = newMap
 			}
 		}
-	}
 
+	}
 	fmt.Println("Collision Map: ", collisionMap)
+}
+
+func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
+	if string(input[i][index]) == "^" {
+		if string(input[i][index-1]) == "|" {
+			collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
+		}
+
+		if string(input[i][index+1]) == "|" {
+			collisionMap[[2]int{i, index + 1}] = outputString + string(input[i][index+1])
+		}
+	} else if string(input[i][index]) == "|" {
+		collisionMap[[2]int{i, index}] = outputString + string(input[i][index])
+	}
 }
