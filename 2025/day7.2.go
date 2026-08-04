@@ -66,7 +66,6 @@ func laboratoriesPart2(input []string) {
 }
 
 func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
-	str := ""
 	if string(input[i][index]) == "^" {
 		if string(input[i][index-1]) == "|" {
 			collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
