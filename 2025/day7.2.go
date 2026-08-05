@@ -60,9 +60,7 @@ func laboratoriesPart2(input []string) {
 				collisionMap = newMap
 			}
 		}
-
 	}
-	fmt.Println("Collision Map: ", collisionMap)
 }
 
 func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
