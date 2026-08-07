@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func laboratoriesPart2(input []string) {
+func laboratoriesPart2(input []string) string {
 	sPosition := strings.Index(input[0], "S")
 
 	for i := 1; i < len(input); i++ {
@@ -60,6 +60,7 @@ func laboratoriesPart2(input []string) {
 			}
 		}
 	}
+	return ""
 }
 
 func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
