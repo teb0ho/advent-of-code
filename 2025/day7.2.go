@@ -5,6 +5,11 @@ import (
 	"strings"
 )
 
+type Node struct {
+	Value    string
+	Children []*Node
+}
+
 func laboratoriesPart2(input []string) string {
 	sPosition := strings.Index(input[0], "S")
 
