@@ -35,7 +35,7 @@ func laboratoriesPart2(input []string) string {
 		}
 	}
 
-	// var validPaths []string = []string{}
+	var validPaths []string = []string{}
 
 	// use new modified input to search all valid pipe paths
 	fileLength := len(input)
