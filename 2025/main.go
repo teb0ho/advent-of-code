@@ -20,6 +20,11 @@ func main() {
 	scanner := bufio.NewScanner(file)
 	list := []string{}
 
+	if err := scanner.Err(); err != nil {
+		fmt.Printf("Error reading file: %v\n", err)
+		return
+	}
+
 	for scanner.Scan() {
 		line := scanner.Text()
 

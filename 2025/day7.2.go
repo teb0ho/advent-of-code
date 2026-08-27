@@ -1,16 +1,19 @@
 package main
 
 import (
+	"fmt"
 	"regexp"
+	"slices"
 	"strings"
 )
 
-type Node struct {
-	Value    string
-	Children []*Node
+type PathIndex struct {
+	concatenatedString string
+	indexX             int
+	indexY             int
 }
 
-func laboratoriesPart2(input []string) string {
+func laboratoriesPart2(input []string) {
 	sPosition := strings.Index(input[0], "S")
 
 	for i := 1; i < len(input); i++ {
@@ -35,50 +38,66 @@ func laboratoriesPart2(input []string) string {
 		}
 	}
 
-	// var validPaths []string = []string{}
+	var paths []PathIndex = []PathIndex{}
 
-	// previousIndex := 0
-	// use new modified input to search all valid pipe paths
-	//fileLength := len(input)
-	// previousIndex := 0
-	// map will store string index where a collision was found and appended string at that point
-	collisionMap := make(map[[2]int]string)
-	outputString := ""
-	index := 0
+	fileLength := len(input) - 1
+
 	// traverse all paths and check if they are valid
 	for i := 1; i < len(input); i++ {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
 			pipePositions := re.FindStringIndex(input[i])
-			index = pipePositions[0]
-			outputString += string(input[i][index])
+			index := pipePositions[0]
+
+			paths = append(paths, PathIndex{concatenatedString: string(input[i][index]), indexX: index, indexY: i})
 		} else {
-			if string(input[i][index]) == "|" {
-				outputString += string(input[i][index])
-			} else if len(collisionMap) == 0 && string(input[i][index]) == "^" {
-				checkCollictionOrTraverseVertically(input, i, index, collisionMap, outputString)
-			} else {
-				newMap := make(map[[2]int]string)
-				for collisionIndex, collisionString := range collisionMap {
-					checkCollictionOrTraverseVertically(input, i, collisionIndex[1], newMap, collisionString)
+			for index, path := range paths {
+				if string(input[i][path.indexX]) == "|" {
+					newString := path.concatenatedString + string(input[i][path.indexX])
+					paths = append(paths, PathIndex{concatenatedString: newString, indexX: path.indexX, indexY: i})
+					paths = slices.Delete(paths, index, index+1)
+				} else if string(input[i][path.indexX]) == "^" {
+					paths = checkCollictionOrTraverseVertically(input, i, path.indexX, paths, path.indexY)
 				}
-				collisionMap = newMap
 			}
 		}
 	}
-	return ""
+
+	count := 0
+
+	for _, path := range paths {
+		if len(path.concatenatedString) == fileLength {
+			count++
+		}
+	}
+
+	fmt.Println(count)
 }
 
-func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
-	if string(input[i][index]) == "^" {
-		if string(input[i][index-1]) == "|" {
-			collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
+func checkCollictionOrTraverseVertically(input []string, i int, indexX int, paths []PathIndex, parentIndex int) []PathIndex {
+	indexOfReferenceElement := -1
+	for i, path := range paths {
+		if path.indexX == indexX && path.indexY == parentIndex {
+			indexOfReferenceElement = i
+			break
 		}
-
-		if string(input[i][index+1]) == "|" {
-			collisionMap[[2]int{i, index + 1}] = outputString + string(input[i][index+1])
-		}
-	} else if string(input[i][index]) == "|" {
-		collisionMap[[2]int{i, index}] = outputString + string(input[i][index])
 	}
+
+	if indexOfReferenceElement == -1 {
+		return paths
+	}
+
+	if string(input[i][indexX-1]) == "|" {
+		paths = append(paths, PathIndex{concatenatedString: paths[indexOfReferenceElement].concatenatedString + string(input[i][indexX-1]), indexX: indexX - 1, indexY: i})
+	}
+
+	if string(input[i][indexX+1]) == "|" {
+		paths = append(paths, PathIndex{concatenatedString: paths[indexOfReferenceElement].concatenatedString + string(input[i][indexX+1]), indexX: indexX + 1, indexY: i})
+	}
+
+	// remove the parent path from the paths slice
+
+	paths = slices.Delete(paths, indexOfReferenceElement, indexOfReferenceElement+1)
+
+	return paths
 }
