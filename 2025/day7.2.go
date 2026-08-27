@@ -5,7 +5,12 @@ import (
 	"strings"
 )
 
-func laboratoriesPart2(input []string) {
+type Node struct {
+	Value    string
+	Children []*Node
+}
+
+func laboratoriesPart2(input []string) string {
 	sPosition := strings.Index(input[0], "S")
 
 	for i := 1; i < len(input); i++ {
@@ -33,8 +38,11 @@ func laboratoriesPart2(input []string) {
 	// var validPaths []string = []string{}
 
 	// previousIndex := 0
+	// use new modified input to search all valid pipe paths
+	//fileLength := len(input)
+	// previousIndex := 0
 	// map will store string index where a collision was found and appended string at that point
-	// collisionMap := make(map[[2]int]string)
+	collisionMap := make(map[[2]int]string)
 	outputString := ""
 	index := 0
 	// traverse all paths and check if they are valid
@@ -45,10 +53,32 @@ func laboratoriesPart2(input []string) {
 			index = pipePositions[0]
 			outputString += string(input[i][index])
 		} else {
-
 			if string(input[i][index]) == "|" {
-
+				outputString += string(input[i][index])
+			} else if len(collisionMap) == 0 && string(input[i][index]) == "^" {
+				checkCollictionOrTraverseVertically(input, i, index, collisionMap, outputString)
+			} else {
+				newMap := make(map[[2]int]string)
+				for collisionIndex, collisionString := range collisionMap {
+					checkCollictionOrTraverseVertically(input, i, collisionIndex[1], newMap, collisionString)
+				}
+				collisionMap = newMap
 			}
 		}
+	}
+	return ""
+}
+
+func checkCollictionOrTraverseVertically(input []string, i int, index int, collisionMap map[[2]int]string, outputString string) {
+	if string(input[i][index]) == "^" {
+		if string(input[i][index-1]) == "|" {
+			collisionMap[[2]int{i, index - 1}] = outputString + string(input[i][index-1])
+		}
+
+		if string(input[i][index+1]) == "|" {
+			collisionMap[[2]int{i, index + 1}] = outputString + string(input[i][index+1])
+		}
+	} else if string(input[i][index]) == "|" {
+		collisionMap[[2]int{i, index}] = outputString + string(input[i][index])
 	}
 }
