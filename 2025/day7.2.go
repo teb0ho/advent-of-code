@@ -48,14 +48,16 @@ func laboratoriesPart2(input []string) {
 			re := regexp.MustCompile(`\|`)
 			pipePositions := re.FindStringIndex(input[i])
 			index := pipePositions[0]
-
 			paths = append(paths, PathIndex{concatenatedString: string(input[i][index]), indexX: index, indexY: i})
 		} else {
-			for index, path := range paths {
+			// indexesToRemove := []int{}
+			for _, path := range paths {
 				if string(input[i][path.indexX]) == "|" {
 					newString := path.concatenatedString + string(input[i][path.indexX])
 					paths = append(paths, PathIndex{concatenatedString: newString, indexX: path.indexX, indexY: i})
-					paths = slices.Delete(paths, index, index+1)
+
+					indexToRemove := findElementIndex(paths, path.indexX, path.indexY)
+					paths = slices.Delete(paths, indexToRemove, indexToRemove+1)
 				} else if string(input[i][path.indexX]) == "^" {
 					paths = checkCollictionOrTraverseVertically(input, i, path.indexX, paths, path.indexY)
 				}
@@ -75,13 +77,7 @@ func laboratoriesPart2(input []string) {
 }
 
 func checkCollictionOrTraverseVertically(input []string, i int, indexX int, paths []PathIndex, parentIndex int) []PathIndex {
-	indexOfReferenceElement := -1
-	for i, path := range paths {
-		if path.indexX == indexX && path.indexY == parentIndex {
-			indexOfReferenceElement = i
-			break
-		}
-	}
+	indexOfReferenceElement := findElementIndex(paths, indexX, parentIndex)
 
 	if indexOfReferenceElement == -1 {
 		return paths
@@ -100,4 +96,17 @@ func checkCollictionOrTraverseVertically(input []string, i int, indexX int, path
 	paths = slices.Delete(paths, indexOfReferenceElement, indexOfReferenceElement+1)
 
 	return paths
+}
+
+func findElementIndex(paths []PathIndex, indexX int, parentIndex int) int {
+	indexOfReferenceElement := -1
+
+	for i, path := range paths {
+		if path.indexX == indexX && path.indexY == parentIndex {
+			indexOfReferenceElement = i
+			break
+		}
+	}
+
+	return indexOfReferenceElement
 }
