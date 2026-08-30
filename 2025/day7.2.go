@@ -43,6 +43,7 @@ func laboratoriesPart2(input []string) {
 	fileLength := len(input) - 1
 
 	// traverse all paths and create path hashes and check if they are valid
+	// use dfs
 	for i := 1; i < len(input); i++ {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
