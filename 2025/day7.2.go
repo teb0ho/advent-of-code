@@ -41,15 +41,16 @@ func laboratoriesPart2(input []string) {
 	var paths []PathIndex = []PathIndex{}
 
 	fileLength := len(input) - 1
-
+	var tree map[string][]string = make(map[string][]string)
 	// traverse all paths and check if they are valid
 	// LLDDRR
-	
+
 	for i := 1; i < len(input); i++ {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
 			pipePositions := re.FindStringIndex(input[i])
 			index := pipePositions[0]
+			tree[fmt.Sprintf("%d,%d", i, index)] = []string{}
 			paths = append(paths, PathIndex{concatenatedString: string(input[i][index]), indexX: index, indexY: i})
 		} else {
 			// indexesToRemove := []int{}
