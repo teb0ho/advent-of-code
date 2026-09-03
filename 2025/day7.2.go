@@ -44,27 +44,29 @@ func laboratoriesPart2(input []string) {
 	var tree map[string][]string = make(map[string][]string)
 	// traverse all paths and check if they are valid
 	// LLDDRR
-
+	previous := []int{}
+	previousKey := ""
 	for i := 1; i < len(input); i++ {
 		if i == 1 {
 			re := regexp.MustCompile(`\|`)
 			pipePositions := re.FindStringIndex(input[i])
 			index := pipePositions[0]
 			tree[fmt.Sprintf("%d,%d", i, index)] = []string{}
-			paths = append(paths, PathIndex{concatenatedString: string(input[i][index]), indexX: index, indexY: i})
+			previous = []int{index}
+			previousKey = fmt.Sprintf("%d,%d", i-1, previous[0])
 		} else {
-			// indexesToRemove := []int{}
-			for _, path := range paths {
-				if string(input[i][path.indexX]) == "|" {
-					newString := path.concatenatedString + string(input[i][path.indexX])
-					paths = append(paths, PathIndex{concatenatedString: newString, indexX: path.indexX, indexY: i})
+			if len(previous) == 0 {
 
-					indexToRemove := findElementIndex(paths, path.indexX, path.indexY)
-					paths = slices.Delete(paths, indexToRemove, indexToRemove+1)
-				} else if string(input[i][path.indexX]) == "^" {
-					paths = checkCollictionOrTraverseVertically(input, i, path.indexX, paths, path.indexY)
+				if string(input[i][previous[0]]) == "|" {
+					tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, previous[0])}
+
+				} else if string(input[i][previous[0]]) == "^" {
+					tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, previous[0]-1), fmt.Sprintf("%d,%d", i, previous[0]+1)}
+					previous = []int{previous[0] - 1, previous[0] + 1}
+					previousKey = fmt.Sprintf("%d,%d", i-1, previous[0])
 				}
 			}
+
 		}
 	}
 
