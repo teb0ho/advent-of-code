@@ -68,11 +68,22 @@ func laboratoriesPart2(input []string) {
 	}
 
 	count := 0
-	for key := range tree {
-		if strings.Contains(key, "15,") {
-			count++
-		}
-	}
+	count = countPaths(tree, "1,7")
 
 	fmt.Println(count)
+}
+
+func countPaths(tree map[string][]string, node string) int {
+	// Empty array = we've reached an endpoint
+	if len(tree[node]) == 0 {
+		return 1
+	}
+
+	count := 0
+
+	for _, child := range tree[node] {
+		count += countPaths(tree, child)
+	}
+
+	return count
 }
