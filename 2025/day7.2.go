@@ -48,7 +48,7 @@ func laboratoriesPart2(input []string) {
 				newNodeKeys := []int{}
 				for _, col := range nodes {
 					if string(input[row][col]) == "|" && len(input)-1 == row {
-						tree[nodeKey] = []string{}
+						tree[fmt.Sprintf("%d,%d", row, col)] = []string{}
 						continue
 					} else if string(input[row][col]) == "|" {
 						tree[nodeKey] = []string{fmt.Sprintf("%d,%d", row, col)}
@@ -68,24 +68,11 @@ func laboratoriesPart2(input []string) {
 	}
 
 	count := 0
-
-	dfs(tree, "1,7", make(map[string]bool), &count)
+	for key := range tree {
+		if strings.Contains(key, "15,") {
+			count++
+		}
+	}
 
 	fmt.Println(count)
-}
-
-func dfs(tree map[string][]string, start string, visited map[string]bool, count *int) {
-
-	if visited[start] {
-		return
-	}
-	visited[start] = true
-
-	if strings.Contains(start, "15,") {
-		*count++
-	}
-
-	for _, neighbor := range tree[start] {
-		dfs(tree, neighbor, visited, count)
-	}
 }
