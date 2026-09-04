@@ -55,16 +55,18 @@ func laboratoriesPart2(input []string) {
 			previous = []int{index}
 			previousKey = fmt.Sprintf("%d,%d", i-1, previous[0])
 		} else {
-			if len(previous) == 0 {
+			if len(previous) != 0 {
+				for _, prev := range previous {
+					if string(input[i][prev]) == "|" {
+						tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, previous[0])}
 
-				if string(input[i][previous[0]]) == "|" {
-					tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, previous[0])}
-
-				} else if string(input[i][previous[0]]) == "^" {
-					tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, previous[0]-1), fmt.Sprintf("%d,%d", i, previous[0]+1)}
-					previous = []int{previous[0] - 1, previous[0] + 1}
-					previousKey = fmt.Sprintf("%d,%d", i-1, previous[0])
+					} else if string(input[i][prev]) == "^" {
+						tree[previousKey] = []string{fmt.Sprintf("%d,%d", i, prev-1), fmt.Sprintf("%d,%d", i, prev+1)}
+						previous = []int{prev - 1, prev + 1}
+						previousKey = fmt.Sprintf("%d,%d", i-1, prev)
+					}
 				}
+
 			}
 
 		}
