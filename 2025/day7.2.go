@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"regexp"
+	"slices"
+	"strconv"
 	"strings"
 )
 
@@ -31,10 +33,10 @@ func laboratoriesPart2(input []string) {
 		}
 	}
 
-	var tree map[string][]string = make(map[string][]string)
+	var tree = make(map[string][]string)
 
-	nodes := []int{}
-	nodeKey := ""
+	var nodes []int
+	nodeKeys := []string{}
 	for row := 1; row < len(input); row++ {
 		if row == 1 {
 			re := regexp.MustCompile(`\|`)
@@ -42,39 +44,50 @@ func laboratoriesPart2(input []string) {
 			column := pipePositions[0]
 			tree[fmt.Sprintf("%d,%d", row, column)] = []string{}
 			nodes = []int{column}
-			nodeKey = fmt.Sprintf("%d,%d", row, nodes[0])
+			nodeKeys = []string{fmt.Sprintf("%d,%d", row, nodes[0])}
 		} else {
 			if len(nodes) != 0 {
-				newNodeKeys := []int{}
+				newNodes := []int{}
+				newNodeKeys := []string{}
 				for _, col := range nodes {
 					if string(input[row][col]) == "|" && len(input)-1 == row {
 						tree[fmt.Sprintf("%d,%d", row, col)] = []string{}
 						continue
 					} else if string(input[row][col]) == "|" {
-						tree[nodeKey] = []string{fmt.Sprintf("%d,%d", row, col)}
-						nodeKey = fmt.Sprintf("%d,%d", row, col)
-						newNodeKeys = append(newNodeKeys, col)
+						for _, nk := range nodeKeys {
+							part, _ := strconv.Atoi(strings.Split(nk, ",")[1])
+
+							if /*strings.Contains(nk, fmt.Sprintf(",%d", col))*/ slices.Contains(nodes, part) {
+								tree[nk] = []string{fmt.Sprintf("%d,%d", row, col)}
+							}
+						}
+						newNodeKeys = append(newNodeKeys, fmt.Sprintf("%d,%d", row, col))
 
 					} else if string(input[row][col]) == "^" {
-						tree[nodeKey] = []string{fmt.Sprintf("%d,%d", row, col-1), fmt.Sprintf("%d,%d", row, col+1)}
-						newNodeKeys = append(newNodeKeys, col-1, col+1)
-						nodeKey = fmt.Sprintf("%d,%d", row-1, col)
+						for _, nk := range nodeKeys {
+							part, _ := strconv.Atoi(strings.Split(nk, ",")[1])
+
+							if /*strings.Contains(nk, fmt.Sprintf(",%d", col))*/ slices.Contains(nodes, part) {
+								tree[nk] = []string{fmt.Sprintf("%d,%d", row, col-1), fmt.Sprintf("%d,%d", row, col+1)}
+							}
+						}
+						newNodes = append(newNodes, col-1, col+1)
+						newNodeKeys = append(newNodeKeys, fmt.Sprintf("%d,%d", row, col+1), fmt.Sprintf("%d,%d", row, col-1))
 					}
 				}
 
-				nodes = newNodeKeys
+				nodes = newNodes
+				nodeKeys = newNodeKeys
 			}
 		}
 	}
 
-	count := 0
-	count = countPaths(tree, "1,7")
+	count := countPaths(tree, "1,7")
 
 	fmt.Println(count)
 }
 
 func countPaths(tree map[string][]string, node string) int {
-	// Empty array = we've reached an endpoint
 	if len(tree[node]) == 0 {
 		return 1
 	}
